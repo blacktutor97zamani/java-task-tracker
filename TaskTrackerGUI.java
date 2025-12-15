@@ -37,6 +37,13 @@ public class TaskTrackerGUI {
         frame.setVisible(true);
 
 
+        //adding Task Functionality to the add task button
+        addButton.addActionListener(e -> {
+            String task = JOptionPane.showInputDialog(frame, "Enter a new task");
+            if (task !=null && !task.trim().isEmpty()) {
+                taskModel.addElement(task);
+            }
+        });
 
 
 
