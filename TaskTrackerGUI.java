@@ -46,6 +46,18 @@ public class TaskTrackerGUI {
         });
 
 
+        //adding Task Functionality to the delete task button
+
+        deleteButton.addActionListener(e -> {
+            int selectedIndex = taskList.getSelectedIndex();
+            if (selectedIndex != -1){
+                taskModel.remove(selectedIndex);
+
+            }else{
+                JOptionPane.showMessageDialog(frame, "Please select a task to delete");
+            }
+        });
+
 
     }
 
