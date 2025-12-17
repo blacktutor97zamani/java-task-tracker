@@ -10,6 +10,8 @@ import java.awt.*;
 import java.io.*;
 
 public class TaskTrackerGUI {
+    private static DefaultListModel<String> taskModel = new DefaultListModel<>(); 
+    
     public static void main(String[] args){
 
         //creating the main window frame (Main Window using Java Swing)
@@ -20,8 +22,8 @@ public class TaskTrackerGUI {
 
 
         //Set Task List (task list area)
-        DefaultListModel<String> taskModel = new DefaultListModel<>();
-        JList<String> taskList = new JList<>();
+        
+        JList<String> taskList = new JList<>(taskModel);
         JScrollPane scrollPane = new JScrollPane(taskList);
         frame.add(scrollPane, BorderLayout.CENTER);
 
