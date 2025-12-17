@@ -22,6 +22,22 @@ public class TaskTrackerGUI {
             ex.printStackTrace();
         }
     }
+
+    //Load Task
+    public void loadTasks(){
+        File file = new File("tasks.txt");
+        if(file.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    taskModel.addElement(line);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+        
     public static void main(String[] args){
 
         //creating the main window frame (Main Window using Java Swing)
