@@ -11,7 +11,17 @@ import java.io.*;
 
 public class TaskTrackerGUI {
     private static DefaultListModel<String> taskModel = new DefaultListModel<>(); 
-    
+
+    //Save Tasks Method
+    public void saveTasks() {
+        try(PrintWriter writer = new PrintWriter("task.txt")) {
+            for(int i = 0; i < taskModel.getSize(); i++) {
+                writer.println(taskModel.get(i));
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     public static void main(String[] args){
 
         //creating the main window frame (Main Window using Java Swing)
