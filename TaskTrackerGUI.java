@@ -29,7 +29,7 @@ public class TaskTrackerGUI {
 
     //Load Task
     public static void loadTasks(){
-        File file = new File("/E:\\projects\\taskTracker\\my taskstasks.txt");
+        File file = new File("E:\\projects\\taskTracker\\my tasks/task.txt");
         if(file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
@@ -56,7 +56,6 @@ public class TaskTrackerGUI {
         frame.add(scrollPane, BorderLayout.CENTER);
 
         loadTasks();
-
         //Buttons: Add Task, Delete Task
         JPanel buttonPanel = new JPanel();
         JButton addButton = new JButton("Add Task");
