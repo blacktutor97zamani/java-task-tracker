@@ -7,34 +7,71 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 public class TaskTrackerGUI {
-    public static void main(String[] args){
 
+    private static DefaultListModel<String> taskModel = new DefaultListModel<>();
+
+
+    //Save Tasks
+
+    public static void saveTasks() {
+        try (PrintWriter writer = new PrintWriter("E:\\projects\\taskTracker\\my tasks/task.txt")) {
+            for (int i = 0; i < taskModel.getSize(); i++){
+                writer.println(taskModel.get(i));
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    //Load Task
+    public static void loadTasks(){
+        File file = new File("/E:\\projects\\taskTracker\\my taskstasks.txt");
+        if(file.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    taskModel.addElement(line);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String[] args){
         //creating the main window frame (Main Window using Java Swing)
         JFrame frame = new JFrame("Task Tracker");
-        frame.setSize(400, 400);
+        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
 
         //Set Task List (task list area)
-        DefaultListModel<String> taskModel = new DefaultListModel<>();
-        JList<String> taskList = new JList<>();
+        JList<String> taskList = new JList<>(taskModel);
         JScrollPane scrollPane = new JScrollPane(taskList);
         frame.add(scrollPane, BorderLayout.CENTER);
+
+        loadTasks();
 
         //Buttons: Add Task, Delete Task
         JPanel buttonPanel = new JPanel();
         JButton addButton = new JButton("Add Task");
         JButton deleteButton = new JButton("Delete Task");
+        JButton saveButton = new JButton("saveButton");
+       // JButton loadTask = new JButton("Load Task");
 
         buttonPanel.add(addButton);
         buttonPanel.add(deleteButton);
+        buttonPanel.add(saveButton);
+        //buttonPanel.add(loadTask);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
         //SHow the frame
-        frame.setVisible(true);
+        //frame.setVisible(true);
 
 
         //adding Task Functionality to the add task button
@@ -44,6 +81,9 @@ public class TaskTrackerGUI {
                 taskModel.addElement(task);
             }
         });
+
+
+
 
 
         //adding Task Functionality to the delete task button
@@ -57,6 +97,12 @@ public class TaskTrackerGUI {
                 JOptionPane.showMessageDialog(frame, "Please select a task to delete");
             }
         });
+
+        saveButton.addActionListener(e -> saveTasks() );
+
+        //loadTask.addActionListener(e -> loadTasks());
+
+        frame.setVisible(true);
 
 
     }
