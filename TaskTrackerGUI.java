@@ -42,7 +42,11 @@ public class TaskTrackerGUI {
         }
     }
 
-    public static void main(String[] args){
+
+
+
+
+    public static void main(String a[]){
         //creating the main window frame (Main Window using Java Swing)
         JFrame frame = new JFrame("Task Tracker");
         frame.setSize(600, 600);
@@ -61,11 +65,13 @@ public class TaskTrackerGUI {
         JButton addButton = new JButton("Add Task");
         JButton deleteButton = new JButton("Delete Task");
         JButton saveButton = new JButton("saveButton");
+        JButton clearTask = new JButton("Clear");
        // JButton loadTask = new JButton("Load Task");
 
         buttonPanel.add(addButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(saveButton);
+        buttonPanel.add(clearTask);
         //buttonPanel.add(loadTask);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -99,8 +105,19 @@ public class TaskTrackerGUI {
 
         saveButton.addActionListener(e -> saveTasks() );
 
-        //loadTask.addActionListener(e -> loadTasks());
+        //********************************Add Clear All Task Button***********************
+        clearTask.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(frame, "Delete all tasks permanently?", "Confirm Clear", JOptionPane.YES_NO_OPTION);
 
+            // if the user click's yes
+            if(confirm == JOptionPane.YES_OPTION){
+                //clear the task model
+                taskModel.clear();
+
+                //overwrite the previous saved tasks
+                saveTasks();
+            }
+        });
         frame.setVisible(true);
 
 
