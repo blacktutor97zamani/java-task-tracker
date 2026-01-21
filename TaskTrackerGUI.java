@@ -60,6 +60,7 @@ public class TaskTrackerGUI {
         frame.add(scrollPane, BorderLayout.CENTER);
 
         loadTasks();
+
         //Buttons: Add Task, Delete Task
         JPanel buttonPanel = new JPanel();
         JButton addButton = new JButton("Add Task");
@@ -75,8 +76,7 @@ public class TaskTrackerGUI {
         //buttonPanel.add(loadTask);
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
-        //SHow the frame
-        //frame.setVisible(true);
+
 
 
         //adding Task Functionality to the add task button
